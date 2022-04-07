@@ -21,4 +21,21 @@ export class GitHubService {
 
     return res.data;
   }
+
+  public async deleteRepoByName(repoName: string) {
+    const res = await this.octokit.request("DELETE /repos/:owner/:repo", {
+      owner: this.githubOrgName,
+      repo: repoName,
+    });
+
+    return res.data;
+  }
+
+  public async searchGitHubCode(query: string) {
+    const res = await this.octokit.request("GET /search/code", {
+      q: query,
+    });
+
+    return res.data;
+  }
 }
